@@ -136,32 +136,44 @@ function ArticleDetail({ task, post, related, comments }: { task: TaskKey; post:
   const images = getImages(post)
   const published = post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : ''
   return (
-    <section className="bg-[#f7f4ef]">
-      <header className="border-b border-black/20">
-        <div className="mx-auto max-w-[1180px] px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+    <section className="bg-[linear-gradient(180deg,#ffffff_0%,#f6f8f3_34%,#eef3ea_100%)]">
+      <header className="border-b border-[#dce3d7] bg-white">
+        <div className="mx-auto max-w-[1280px] px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
           <BackLink task={task} />
-          <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t-4 border-black pt-4 text-[11px] font-black uppercase tracking-[0.16em]">
-            <span className="text-[#c92f2f]">{categoryOf(post, 'News')}</span>
+          <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t-4 border-[#0c274d] pt-4 text-[11px] font-black uppercase tracking-[0.16em]">
+            <span className="text-[var(--slot4-accent)]">{categoryOf(post, 'News')}</span>
             {published ? <time>{published}</time> : null}
           </div>
-          <h1 className="editorial-serif mt-6 max-w-6xl text-5xl font-black leading-[0.94] tracking-[-0.055em] sm:text-6xl lg:text-[5.5rem]">{post.title}</h1>
-          {summaryText(post) ? <p className="mt-6 max-w-4xl text-xl font-bold leading-8 text-black/68 sm:text-2xl">{summaryText(post)}</p> : null}
+          <div className="mt-8 grid gap-8 lg:grid-cols-[1.08fr_.92fr] lg:items-end">
+            <div>
+              <h1 className="editorial-serif max-w-6xl text-5xl font-black leading-[0.94] tracking-[-0.055em] text-[#102113] sm:text-6xl lg:text-[5.5rem]">{post.title}</h1>
+              {summaryText(post) ? <p className="mt-6 max-w-4xl text-xl font-bold leading-8 text-[var(--slot4-muted-text)] sm:text-2xl">{summaryText(post)}</p> : null}
+            </div>
+            <div className="rounded-[2rem] border border-[#dce3d7] bg-[#f8faf6] p-6">
+              <p className="text-[11px] font-black uppercase tracking-[0.22em] text-[var(--slot4-accent)]">Article briefing</p>
+              <p className="mt-4 text-base leading-8 text-[var(--slot4-muted-text)]">
+                Premium reading layout, supporting related coverage, and safe rendering for summaries, images, and content blocks.
+              </p>
+            </div>
+          </div>
         </div>
       </header>
 
       {images[0] ? (
-        <figure className="mx-auto max-w-[1320px] border-x border-b border-black/15 bg-white">
-          <img src={images[0]} alt="" className="max-h-[760px] w-full object-cover" />
-          <figcaption className="border-t border-black/15 px-4 py-3 text-xs italic text-black/55 sm:px-6">Featured image for {post.title}</figcaption>
+        <figure className="mx-auto max-w-[1320px] px-4 pt-8 sm:px-6 lg:px-8">
+          <div className="overflow-hidden rounded-[2.25rem] border border-[#dce3d7] bg-white shadow-[0_20px_50px_rgba(12,39,77,0.08)]">
+            <img src={images[0]} alt="" className="max-h-[760px] w-full object-cover" />
+            <figcaption className="border-t border-[#e5eadf] px-4 py-3 text-xs italic text-[var(--slot4-soft-muted-text)] sm:px-6">Featured image for {post.title}</figcaption>
+          </div>
         </figure>
       ) : null}
 
-      <div className="mx-auto grid max-w-[1180px] gap-12 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,760px)_300px] lg:px-8 lg:py-16">
-        <article className="min-w-0 border-t-4 border-black pt-8">
+      <div className="mx-auto grid max-w-[1280px] gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,780px)_360px] lg:px-8 lg:py-16">
+        <article className="min-w-0 rounded-[2rem] border border-[#dce3d7] bg-white p-6 shadow-[0_18px_45px_rgba(12,39,77,0.06)] sm:p-8">
           <BodyContent post={post} />
           <EditableComments slug={post.slug} comments={comments} />
         </article>
-        <div className="border-t-4 border-[#c92f2f] pt-5">
+        <div className="pt-1">
           <RelatedPanel task={task} post={post} related={related} />
         </div>
       </div>
@@ -400,9 +412,9 @@ function RelatedPanel({ task, post, related, compact = false }: { task: TaskKey;
   return (
     <aside className="min-w-0 space-y-5">
       {!compact ? (
-        <div className="border-b border-black/20 bg-white p-5">
-          <p className="text-xs font-black uppercase tracking-[0.22em] opacity-55">About this post</p>
-          <div className="mt-4 grid gap-3 text-sm font-bold opacity-75">
+        <div className="rounded-[2rem] border border-[#dce3d7] bg-white p-6 shadow-[0_16px_35px_rgba(12,39,77,0.06)]">
+          <p className="text-xs font-black uppercase tracking-[0.22em] text-[var(--slot4-accent)]">About this post</p>
+          <div className="mt-4 grid gap-3 text-sm font-bold text-[var(--slot4-muted-text)]">
             <p className="inline-flex items-center gap-2"><Tag className="h-4 w-4" /> Task: {taskConfig?.label || task}</p>
             <p className="inline-flex items-center gap-2"><CheckCircle2 className="h-4 w-4" /> Site: {SITE_CONFIG.name}</p>
             {post.publishedAt ? <p>Published: {new Date(post.publishedAt).toLocaleDateString()}</p> : null}
@@ -410,10 +422,10 @@ function RelatedPanel({ task, post, related, compact = false }: { task: TaskKey;
         </div>
       ) : null}
       {related.length ? (
-        <div className="border-b border-black/20 bg-white p-5">
+        <div className="rounded-[2rem] border border-[#dce3d7] bg-white p-6 shadow-[0_16px_35px_rgba(12,39,77,0.06)]">
           <div className="flex items-center justify-between gap-3">
             <h2 className="text-lg font-black tracking-[-0.04em]">More like this</h2>
-            <Link href={taskConfig?.route || '/'} className="text-xs font-black uppercase tracking-[0.16em] opacity-55">View all</Link>
+            <Link href={taskConfig?.route || '/'} className="text-xs font-black uppercase tracking-[0.16em] text-[var(--slot4-accent)]">View all</Link>
           </div>
           <div className="mt-5 grid gap-3">
             {related.map((item) => <RelatedCard key={item.id || item.slug} task={task} post={item} />)}
@@ -427,11 +439,11 @@ function RelatedPanel({ task, post, related, compact = false }: { task: TaskKey;
 function RelatedCard({ task, post }: { task: TaskKey; post: SitePost }) {
   const image = getImages(post)[0]
   return (
-    <Link href={buildPostUrl(task, post.slug)} className="group flex gap-3 border-t border-black/15 py-3 transition hover:text-[#c92f2f]">
-      {image && task !== 'sbm' ? <img src={image} alt="" className="h-20 w-20 shrink-0 object-cover" /> : <div className="flex h-20 w-20 shrink-0 items-center justify-center bg-black text-white"><FileText className="h-6 w-6" /></div>}
+    <Link href={buildPostUrl(task, post.slug)} className="group flex gap-3 border-t border-[#e5eadf] py-3 transition hover:text-[var(--slot4-accent)]">
+      {image && task !== 'sbm' ? <img src={image} alt="" className="h-20 w-20 shrink-0 rounded-[1rem] object-cover" /> : <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-[1rem] bg-[#0c274d] text-white"><FileText className="h-6 w-6" /></div>}
       <div className="min-w-0">
         <h3 className="line-clamp-3 text-sm font-black leading-tight tracking-[-0.03em]">{post.title}</h3>
-        <p className="mt-2 line-clamp-2 text-xs leading-5 opacity-60">{summaryText(post)}</p>
+        <p className="mt-2 line-clamp-2 text-xs leading-5 text-[var(--slot4-muted-text)]">{summaryText(post)}</p>
       </div>
     </Link>
   )
@@ -439,16 +451,16 @@ function RelatedCard({ task, post }: { task: TaskKey; post: SitePost }) {
 
 function EditableComments({ slug, comments }: { slug: string; comments: Array<{ id: string; name: string; comment: string; createdAt: string }> }) {
   return (
-    <section className="mt-12 border-t-4 border-black bg-white p-5">
+    <section className="mt-12 rounded-[1.8rem] border border-[#dce3d7] bg-[#f8faf6] p-5">
       <div className="flex items-center gap-2 text-lg font-black"><MessageCircle className="h-5 w-5" /> Comments</div>
       <div className="mt-5 grid gap-3">
         {comments.slice(0, 5).map((comment) => (
-          <div key={comment.id} className="border-t border-black/15 py-4">
+          <div key={comment.id} className="rounded-[1.2rem] border border-[#e5eadf] bg-white px-4 py-4">
             <p className="text-sm font-black">{comment.name}</p>
-            <p className="mt-2 text-sm leading-6 opacity-70">{comment.comment}</p>
+            <p className="mt-2 text-sm leading-6 text-[var(--slot4-muted-text)]">{comment.comment}</p>
           </div>
         ))}
-        {!comments.length ? <p className="text-sm opacity-60">No comments yet for {slug}.</p> : null}
+        {!comments.length ? <p className="text-sm text-[var(--slot4-muted-text)]">No comments yet for {slug}.</p> : null}
       </div>
     </section>
   )

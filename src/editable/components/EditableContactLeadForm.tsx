@@ -34,7 +34,7 @@ export function EditableContactLeadForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-8 border-t-4 border-black bg-white pt-7">
+    <form onSubmit={handleSubmit} className="mt-8 rounded-[1.8rem] border border-[#d8dfd2] bg-white p-6 shadow-[0_16px_40px_rgba(12,39,77,0.06)] sm:p-8">
       <div className="grid gap-4 md:grid-cols-2">
         <Field name="name" label="Full name" placeholder="Your name" required />
         <Field name="email" type="email" label="Email address" placeholder="you@example.com" required />
@@ -45,16 +45,16 @@ export function EditableContactLeadForm() {
       </div>
       <label className="mt-4 grid gap-2 text-sm font-black opacity-75">
         Message
-        <textarea name="message" required rows={6} placeholder="Tell us what you need help with..." className="border border-black bg-white px-4 py-3 text-base font-medium outline-none transition focus:border-[#c92f2f]" />
+        <textarea name="message" required rows={6} placeholder="Tell us what you need help with..." className="rounded-[1.2rem] border border-[#d8dfd2] bg-[#fbfcf8] px-4 py-3 text-base font-medium outline-none transition focus:border-[var(--slot4-accent-fill)] focus:bg-white" />
       </label>
       <input name="company" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
       {message ? (
-        <div className={`mt-5 flex items-start gap-3 border px-4 py-3 text-sm font-bold ${status === 'success' ? 'border-emerald-800 bg-emerald-50 text-emerald-800' : 'border-red-700 bg-red-50 text-red-700'}`}>
+        <div className={`mt-5 flex items-start gap-3 rounded-[1rem] border px-4 py-3 text-sm font-bold ${status === 'success' ? 'border-emerald-200 bg-emerald-50 text-emerald-800' : 'border-red-200 bg-red-50 text-red-700'}`}>
           {status === 'success' ? <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" /> : null}
           <span>{message}</span>
         </div>
       ) : null}
-      <button type="submit" disabled={status === 'submitting'} className="mt-6 inline-flex h-[3.25rem] w-full items-center justify-center gap-2 border border-black bg-black px-6 text-xs font-black uppercase tracking-[0.24em] text-white transition hover:bg-[#c92f2f] disabled:cursor-not-allowed disabled:opacity-70">
+      <button type="submit" disabled={status === 'submitting'} className="mt-6 inline-flex h-[3.5rem] w-full items-center justify-center gap-2 rounded-full bg-[linear-gradient(135deg,var(--slot4-accent-fill),#3c68ff)] px-6 text-xs font-black uppercase tracking-[0.24em] text-white transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70">
         {status === 'submitting' ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
         Send message
       </button>
@@ -66,7 +66,7 @@ function Field({ name, label, type = 'text', placeholder, required = false }: { 
   return (
     <label className="grid gap-2 text-sm font-black opacity-75">
       {label}
-      <input name={name} type={type} required={required} placeholder={placeholder} className="h-[3.25rem] border border-black bg-white px-4 text-base font-medium outline-none transition focus:border-[#c92f2f]" />
+      <input name={name} type={type} required={required} placeholder={placeholder} className="h-[3.5rem] rounded-[1.1rem] border border-[#d8dfd2] bg-[#fbfcf8] px-4 text-base font-medium outline-none transition focus:border-[var(--slot4-accent-fill)] focus:bg-white" />
     </label>
   )
 }
