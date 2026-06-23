@@ -10,7 +10,7 @@ export const pagesContent = {
       keywords: ['story platform', 'article site', 'visual content', 'content discovery'],
     },
     hero: {
-      badge: 'Latest media and newsroom updates',
+      badge: '',
       title: ['A flexible home for', 'news, media, and public updates.'],
       description: 'Browse distributed media, company announcements, press coverage, and public updates across categories managed directly from the master panel.',
       primaryCta: { label: 'Browse latest updates', href: '/updates' },
