@@ -134,7 +134,6 @@ function BackLink({ task }: { task: TaskKey }) {
 
 function ArticleDetail({ task, post, related, comments }: { task: TaskKey; post: SitePost; related: SitePost[]; comments: Array<{ id: string; name: string; comment: string; createdAt: string }> }) {
   const images = getImages(post)
-  const published = post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : ''
   return (
     <section className="bg-[linear-gradient(180deg,#ffffff_0%,#f6f8f3_34%,#eef3ea_100%)]">
       <header className="border-b border-[#dce3d7] bg-white">
@@ -142,7 +141,6 @@ function ArticleDetail({ task, post, related, comments }: { task: TaskKey; post:
           <BackLink task={task} />
           <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t-4 border-[#0c274d] pt-4 text-[11px] font-black uppercase tracking-[0.16em]">
             <span className="text-[var(--slot4-accent)]">{categoryOf(post, 'News')}</span>
-            {published ? <time>{published}</time> : null}
           </div>
           <div className="mt-8 grid gap-8 lg:grid-cols-[1.08fr_.92fr] lg:items-end">
             <div>
@@ -417,7 +415,6 @@ function RelatedPanel({ task, post, related, compact = false }: { task: TaskKey;
           <div className="mt-4 grid gap-3 text-sm font-bold text-[var(--slot4-muted-text)]">
             <p className="inline-flex items-center gap-2"><Tag className="h-4 w-4" /> Task: {taskConfig?.label || task}</p>
             <p className="inline-flex items-center gap-2"><CheckCircle2 className="h-4 w-4" /> Site: {SITE_CONFIG.name}</p>
-            {post.publishedAt ? <p>Published: {new Date(post.publishedAt).toLocaleDateString()}</p> : null}
           </div>
         </div>
       ) : null}
